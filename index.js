@@ -54,7 +54,7 @@ const server = http.createServer((req, res) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain');
         res.end(JSON.stringify(pdfsBySize));
-    }, 10000);
+    }, 5000);
 
 
 });

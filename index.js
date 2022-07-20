@@ -38,7 +38,7 @@ const server = http.createServer((req, res) => {
                             pdfsBySize.formart1.push({ type: 'small', name: metadata.name, size: metadata.size })
                             pdfsBySize.formart2.small.push({ name: metadata.name, size: metadata.size })
                         }
-                        else if (metadata.size > 100000 && metadata.size < 1000000) {
+                        else if (metadata.size > 100000 && metadata.size < 10000000) {
                             pdfsBySize.formart1.push({ type: 'medium', name: metadata.name, size: metadata.size })
                             pdfsBySize.formart2.medium.push({ name: metadata.name, size: metadata.size })
                         }

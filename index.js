@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
     const options = {
         prefix: "pdf/"
     }
-    let pdfsBySize = [];
+    let pdfsBySize = {formart1:[],formart2:{small:[],medium:[],large:[]}};
     storage
         .bucket(bucketName)
         .getFiles(options)
@@ -35,13 +35,16 @@ const server = http.createServer((req, res) => {
                         console.log(metadata.size);
                         console.log(metadata.name);
                         if (metadata.size < 100000) {
-                            pdfsBySize.push({ type: 'small', name: metadata.name, size: metadata.size })
+                            pdfsBySize.formart1.push({ type: 'small', name: metadata.name, size: metadata.size })
+                            pdfsBySize.formart2.small.push({ name: metadata.name, size: metadata.size })
                         }
                         else if (metadata.size > 100000 && metadata.size < 1000000) {
-                            pdfsBySize.push({ type: 'medium', name: metadata.name, size: metadata.size })
+                            pdfsBySize.formart1.push({ type: 'medium', name: metadata.name, size: metadata.size })
+                            pdfsBySize.formart2.medium.push({ name: metadata.name, size: metadata.size })
                         }
                         else {
-                            pdfsBySize.push({ type: 'large', name: metadata.name, size: metadata.size })
+                            pdfsBySize.formart1.push({ type: 'large', name: metadata.name, size: metadata.size })
+                            pdfsBySize.formart2.large.push({ name: metadata.name, size: metadata.size })
                         }
                     }).catch(metadata_err => {
                         console.error(metadata_err);
